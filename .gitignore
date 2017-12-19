@@ -4,6 +4,7 @@
 .expo/
 .idea
 .idea/
+.idea/*
 # dependencies
 /node_modules
 node_modules
