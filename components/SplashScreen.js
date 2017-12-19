@@ -11,9 +11,9 @@ export default class SplashScreen extends Component {
 	}
 
 	render() {
-		return (<Container>
-					<Image source={require('../assets/images/bt.png')} />
-					<Text>CyptoMania</Text>
+		return (<Container style={styles.container}>
+					<Image style={styles.logo} source={require('../assets/images/bt.png')} />
+					<Text style={styles.appName}>CyptoMania</Text>
 				</Container>)
 	}
 }
