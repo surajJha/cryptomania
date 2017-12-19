@@ -7,7 +7,7 @@ export default class App extends React.Component {
 
 	constructor() {
 		super();
-		this.SPLASH_SCREEN_TIMEOUT = 3000;
+		this.SPLASH_SCREEN_TIMEOUT = 1000;
 		this.state = {
 			loading: true
 		}
