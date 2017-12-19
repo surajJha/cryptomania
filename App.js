@@ -4,8 +4,10 @@ import CoinList from './components/CoinList';
 
 export default class App extends React.Component {
 
+
 	constructor() {
 		super();
+		this.SPLASH_SCREEN_TIMEOUT = 3000;
 		this.state = {
 			loading: true
 		}
@@ -19,15 +21,12 @@ export default class App extends React.Component {
 		});
 		setTimeout(() => {
 			this.setState({loading: false});
-		}, 3000);
+		}, this.SPLASH_SCREEN_TIMEOUT);
 
 	}
 
   render() {
-	  if(this.state.loading) {
-		  return (<SplashScreen/>);
-	  }
-	  return (<CoinList/>);
+	  return (this.state.loading)? <SplashScreen/> : <CoinList/>;
   }
 }
 
