@@ -3,7 +3,12 @@
  */
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
+import ExternalCalls from '../utils/ExternalCalls';
+import GenericUtils from '../utils/GenericUtils';
 import { Container, Text, StyleProvider, Header, Spinner, Content, List, ListItem, Thumbnail, Left, Body, Right, } from 'native-base';
+
+const externalCalls = new ExternalCalls();
+const utils = new GenericUtils();
 
 export default class CoinList extends Component {
 	state = {
@@ -11,33 +16,10 @@ export default class CoinList extends Component {
 		'loading': true
 	};
 
-	mapping = {
-		'BTC': {'name':'Bitcoin', 'imgPath': require('../assets/images/Bitcoin.png')},
-		'ETH': {'name':'Ethereum', 'imgPath': require('../assets/images/Ethereum.png')},
-		'BCH': {'name':'Bitcoin Cash', 'imgPath': require('../assets/images/bitcoinCash.png')},
-		'XRP': {'name':'Ripple', 'imgPath': require('../assets/images/Ripple.png')},
-		'LTC': {'name':'Litecoin', 'imgPath': require('../assets/images/Litecoin.png')},
-		'MIOTA': {'name':'Iota', 'imgPath': require('../assets/images/Iota.png')},
-		'OMG': {'name':'OmiseGo', 'imgPath': require('../assets/images/OmiseGo.png')},
-		'GNT': {'name':'Golem', 'imgPath': require('../assets/images/Golem.png')}
-	};
-
 	async componentDidMount() {
-		let tickerData = await fetch('https://koinex.in/api/ticker');
-		tickerData = await tickerData.json();
-
-		const tickerPrices = tickerData.prices;
-		const prices = [];
-		for(const key in tickerPrices) {
-			prices.push({
-				'currency': this.mapping[key].name,
-				'price': tickerPrices[key],
-				'imgPath': this.mapping[key].imgPath
-			});
-		}
-
+		const {err, result} = await utils.invoker(externalCalls.getPrices());
 		this.setState({
-			prices,
+			prices: result,
 			'loading': false
 		});
 	}

@@ -25,8 +25,7 @@ export default class App extends React.Component {
 
 	}
 
-  render() {
-	  return (this.state.loading)? <SplashScreen/> : <CoinList/>;
-  }
+	render() {
+		return (this.state.loading)? <SplashScreen/> : <CoinList/>;
+	}
 }
-
